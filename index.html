@@ -1357,6 +1357,88 @@ button, input, select, textarea {
   .lab-progress-fill { transform: scaleX(0.9); }
 }
 
+/* ── AI Data section animations ──────────────────────── */
+.ai-orbs { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.ai-orb { position: absolute; border-radius: 50%; filter: blur(46px); opacity: 0.55; will-change: transform; }
+.ai-orb-1 {
+  width: 300px; height: 300px; left: -70px; top: 8%;
+  background: radial-gradient(circle, rgba(14,165,233,0.55), transparent 70%);
+  animation: aiDrift 19s ease-in-out infinite;
+}
+.ai-orb-2 {
+  width: 240px; height: 240px; right: -60px; top: 38%;
+  background: radial-gradient(circle, rgba(99,102,241,0.5), transparent 70%);
+  animation: aiDrift 24s ease-in-out infinite reverse;
+}
+.ai-orb-3 {
+  width: 200px; height: 200px; left: 42%; bottom: -60px;
+  background: radial-gradient(circle, rgba(147,197,253,0.42), transparent 70%);
+  animation: aiDrift 28s ease-in-out infinite;
+}
+@keyframes aiDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(46px, -34px) scale(1.12); }
+  66% { transform: translate(-34px, 28px) scale(0.92); }
+}
+
+.ai-eq { display: flex; align-items: flex-end; gap: 4px; height: 28px; margin-top: 16px; }
+.ai-eq span {
+  flex: 1; border-radius: 3px; min-height: 4px;
+  background: linear-gradient(180deg, var(--teal), var(--rose));
+  animation: aiEq 1.1s ease-in-out infinite alternate;
+}
+.ai-eq span:nth-child(2)  { animation-delay: 0.12s; }
+.ai-eq span:nth-child(3)  { animation-delay: 0.24s; }
+.ai-eq span:nth-child(4)  { animation-delay: 0.36s; }
+.ai-eq span:nth-child(5)  { animation-delay: 0.30s; }
+.ai-eq span:nth-child(6)  { animation-delay: 0.18s; }
+.ai-eq span:nth-child(7)  { animation-delay: 0.42s; }
+.ai-eq span:nth-child(8)  { animation-delay: 0.24s; }
+.ai-eq span:nth-child(9)  { animation-delay: 0.10s; }
+@keyframes aiEq {
+  from { height: 18%; opacity: 0.5; }
+  to { height: 100%; opacity: 1; }
+}
+
+.ai-cap-chip {
+  position: relative; overflow: hidden;
+  animation: aiChipFloat 5s ease-in-out infinite;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.ai-cap-chip:nth-child(2) { animation-delay: 0.6s; }
+.ai-cap-chip:nth-child(3) { animation-delay: 1.2s; }
+.ai-cap-chip:nth-child(4) { animation-delay: 1.8s; }
+.ai-cap-chip::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--rose), var(--teal));
+  background-size: 200% 100%;
+  animation: aiSheen 4s linear infinite;
+  opacity: 0.85;
+}
+.ai-cap-chip:hover {
+  border-color: rgba(14,165,233,0.55) !important;
+  box-shadow: 0 16px 40px -14px rgba(14,165,233,0.45);
+  background: rgba(255,255,255,0.09) !important;
+}
+@keyframes aiChipFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes aiSheen {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.ai-stat-strip { position: relative; animation: aiStripGlow 5s ease-in-out infinite; }
+@keyframes aiStripGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14,165,233,0); }
+  50% { box-shadow: 0 0 34px -6px rgba(14,165,233,0.38); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-orb, .ai-eq span, .ai-cap-chip, .ai-cap-chip::before, .ai-stat-strip { animation: none; }
+}
+
 /* ── Global animation polish ─────────────────────────── */
 .display .accent {
   background-size: 200% 200%;
@@ -3068,7 +3150,12 @@ document.addEventListener("DOMContentLoaded", () => {
     <!-- AI DATA SOLUTIONS -->
     <section class="section section--dark" id="ai-data" style="position:relative;overflow:hidden;">
       <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(14,165,233,0.18),transparent 55%),radial-gradient(ellipse at 85% 100%,rgba(99,102,241,0.16),transparent 55%);pointer-events:none;"></div>
-      <div class="section-shell" style="position:relative;">
+      <div class="ai-orbs" aria-hidden="true">
+        <span class="ai-orb ai-orb-1"></span>
+        <span class="ai-orb ai-orb-2"></span>
+        <span class="ai-orb ai-orb-3"></span>
+      </div>
+      <div class="section-shell" style="position:relative;z-index:1;">
         <div class="section-head section-head--stacked reveal">
           <div class="section-kicker" style="color:var(--teal);">AI Data Solutions</div>
           <h2 class="section-title" style="max-width:30ch;color:var(--white);">The human layer behind better AI models.</h2>
@@ -3115,40 +3202,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <!-- AI capability chips -->
         <div class="reveal" style="margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
-          <div style="padding:24px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);">
+          <div class="ai-cap-chip" style="padding:24px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);">
             <p style="font-size:1rem;font-weight:700;color:var(--white);margin:0 0 6px;">🎙️ Speech Collection</p>
             <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);margin:0;">Scripted, spontaneous, wake-word, and code-switching audio across 125+ locales.</p>
+            <div class="ai-eq" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
           </div>
-          <div style="padding:24px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);">
+          <div class="ai-cap-chip" style="padding:24px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);">
             <p style="font-size:1rem;font-weight:700;color:var(--white);margin:0 0 6px;">🏷️ Data Labeling</p>
             <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);margin:0;">Text, audio, image, and video annotation with documented quality metrics.</p>
           </div>
-          <div style="padding:24px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);">
+          <div class="ai-cap-chip" style="padding:24px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);">
             <p style="font-size:1rem;font-weight:700;color:var(--white);margin:0 0 6px;">📝 Transcription &amp; ASR Data</p>
             <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);margin:0;">Verbatim and clean-read transcription, time-alignment, and audio QA at scale.</p>
           </div>
-          <div style="padding:24px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);">
+          <div class="ai-cap-chip" style="padding:24px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);">
             <p style="font-size:1rem;font-weight:700;color:var(--white);margin:0 0 6px;">🤖 LLM &amp; RLHF Services</p>
             <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);margin:0;">Preference data, response writing, red-teaming, and multilingual evaluation.</p>
           </div>
         </div>
 
         <!-- AI stat strip -->
-        <div class="reveal" style="margin-top:32px;padding:40px 48px;border-radius:20px;background:linear-gradient(135deg,rgba(14,165,233,0.12),rgba(99,102,241,0.12));border:1px solid rgba(14,165,233,0.25);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;text-align:center;">
+        <div class="reveal ai-stat-strip" style="margin-top:32px;padding:40px 48px;border-radius:20px;background:linear-gradient(135deg,rgba(14,165,233,0.12),rgba(99,102,241,0.12));border:1px solid rgba(14,165,233,0.25);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;text-align:center;">
           <div>
-            <p style="font-size:2rem;font-weight:800;color:var(--teal);margin:0 0 6px;">125+</p>
+            <p style="font-size:2rem;font-weight:800;color:var(--teal);margin:0 0 6px;" data-counter-target="125" data-counter-suffix="+">125+</p>
             <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);margin:0;">Languages &amp; locales for AI data</p>
           </div>
           <div>
-            <p style="font-size:2rem;font-weight:800;color:var(--teal);margin:0 0 6px;">500+</p>
+            <p style="font-size:2rem;font-weight:800;color:var(--teal);margin:0 0 6px;" data-counter-target="500" data-counter-suffix="+">500+</p>
             <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);margin:0;">Vetted linguists and data contributors</p>
           </div>
           <div>
-            <p style="font-size:2rem;font-weight:800;color:var(--teal);margin:0 0 6px;">95%+</p>
+            <p style="font-size:2rem;font-weight:800;color:var(--teal);margin:0 0 6px;" data-counter-target="95" data-counter-suffix="%+">95%+</p>
             <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);margin:0;">Target inter-annotator agreement</p>
           </div>
           <div>
-            <p style="font-size:2rem;font-weight:800;color:var(--teal);margin:0 0 6px;">100%</p>
+            <p style="font-size:2rem;font-weight:800;color:var(--teal);margin:0 0 6px;" data-counter-target="100" data-counter-suffix="%">100%</p>
             <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);margin:0;">Consent-documented, NDA-protected data</p>
           </div>
         </div>
