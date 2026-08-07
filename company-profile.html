@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexiScale | Company Profile</title>
+<meta name="description" content="LexiScale company profile — a professional localization and AI data studio delivering localization, media, and AI data solutions in 125+ languages.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#020617; --night2:#0b1220; --ink:#0f172a; --ink-soft:#475569;
+    --paper:#ffffff; --line:#e2e8f0; --sand:#f1f5f9;
+    --teal:#0ea5e9; --indigo:#6366f1; --sky:#93c5fd; --white:#ffffff;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink); background:#e5e9f0; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+
+  /* Screen toolbar */
+  .toolbar{
+    position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:12px 20px; background:rgba(2,6,23,.92); backdrop-filter:blur(8px); color:#fff;
+  }
+  .toolbar .tb-brand{display:flex;align-items:center;gap:10px;font-weight:700;}
+  .toolbar .tb-brand img{width:26px;height:26px;border-radius:6px;background:#fff;}
+  .toolbar .tb-actions{display:flex;gap:10px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;font-size:.85rem;font-weight:600;text-decoration:none;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:linear-gradient(135deg,var(--teal),var(--indigo));color:#fff;}
+  .btn-ghost{background:transparent;border-color:rgba(255,255,255,.28);color:#fff;}
+
+  .doc{max-width:210mm;margin:24px auto;padding:0 12px;}
+
+  .page{
+    position:relative; width:100%; max-width:210mm; min-height:297mm;
+    background:var(--paper); margin:0 auto 22px; padding:20mm 18mm;
+    box-shadow:0 18px 50px -20px rgba(2,6,23,.45); overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .page--dark{background:var(--night); color:#fff;}
+  .page--dark .muted{color:rgba(255,255,255,.72);}
+
+  .orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;pointer-events:none;}
+  .orb.a{width:340px;height:340px;left:-90px;top:-70px;background:radial-gradient(circle,rgba(14,165,233,.6),transparent 70%);}
+  .orb.b{width:300px;height:300px;right:-90px;bottom:-80px;background:radial-gradient(circle,rgba(99,102,241,.55),transparent 70%);}
+
+  .muted{color:var(--ink-soft);}
+  .kicker{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+  .page--dark .kicker{color:var(--sky);}
+  h1,h2,h3{margin:0;letter-spacing:-.02em;line-height:1.12;}
+  .h-lead{font-size:2.05rem;font-weight:800;margin-bottom:14px;}
+  .h-sec{font-size:1.7rem;font-weight:800;margin-bottom:8px;}
+  p{line-height:1.62;}
+  .lead{font-size:1.02rem;color:var(--ink-soft);max-width:60ch;}
+
+  .pnum{position:absolute;bottom:12mm;right:18mm;font-size:.72rem;color:#94a3b8;letter-spacing:.08em;}
+  .page--dark .pnum{color:rgba(255,255,255,.5);}
+  .brandline{position:absolute;bottom:12mm;left:18mm;font-size:.72rem;color:#94a3b8;letter-spacing:.06em;font-weight:600;}
+  .page--dark .brandline{color:rgba(255,255,255,.55);}
+
+  /* Cover */
+  .cover{justify-content:center;align-items:flex-start;text-align:left;}
+  .cover .badge{width:96px;height:96px;border-radius:22px;background:#fff;padding:10px;box-shadow:0 12px 40px -12px rgba(14,165,233,.7);margin-bottom:26px;}
+  .cover .badge img{width:100%;height:100%;object-fit:contain;display:block;}
+  .cover .title{font-size:3.4rem;font-weight:900;letter-spacing:-.03em;line-height:1;margin:0 0 6px;}
+  .cover .title .accent{color:var(--sky);-webkit-text-fill-color:var(--sky);}
+  .cover-tag{font-size:1.5rem;font-weight:700;max-width:22ch;margin:18px 0 10px;line-height:1.2;color:#fff;}
+  .cover .sub{font-size:1rem;color:rgba(255,255,255,.75);max-width:52ch;}
+  .cover .cover-meta{margin-top:40px;display:flex;gap:26px;flex-wrap:wrap;font-size:.9rem;color:rgba(255,255,255,.8);}
+  .cover .cover-meta b{display:block;color:#fff;font-size:1.05rem;}
+  .cover-foot{position:absolute;left:18mm;right:18mm;bottom:16mm;display:flex;justify-content:space-between;font-size:.85rem;color:rgba(255,255,255,.75);border-top:1px solid rgba(255,255,255,.15);padding-top:12px;}
+
+  /* Generic layout helpers */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px;}
+  .stat{background:var(--sand);border:1px solid var(--line);border-radius:14px;padding:16px 18px;}
+  .page--dark .stat{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);}
+  .stat b{display:block;font-size:1.9rem;font-weight:800;color:var(--teal);letter-spacing:-.02em;}
+  .page--dark .stat b{color:var(--sky);}
+  .stat span{font-size:.82rem;color:var(--ink-soft);}
+  .page--dark .stat span{color:rgba(255,255,255,.7);}
+
+  .card{border:1px solid var(--line);border-radius:13px;padding:12px 14px;background:#fff;}
+  .page--dark .card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);}
+  .card h3{font-size:.95rem;font-weight:700;margin-bottom:4px;}
+  .card p{font-size:.8rem;color:var(--ink-soft);margin:0;line-height:1.45;}
+  .page--dark .card p{color:rgba(255,255,255,.7);}
+  .card .idx{font-size:.72rem;font-weight:800;color:var(--teal);letter-spacing:.1em;}
+  .page--dark .card .idx{color:var(--sky);}
+
+  .divh{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo);margin:24px 0 12px;display:flex;align-items:center;gap:10px;}
+  .divh::after{content:"";flex:1;height:1px;background:var(--line);}
+  .page--dark .divh{color:var(--sky);}
+  .page--dark .divh::after{background:rgba(255,255,255,.14);}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px;}
+  .pillar{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;}
+  .pillar .ic{flex-shrink:0;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;background:linear-gradient(135deg,rgba(14,165,233,.15),rgba(99,102,241,.15));border:1px solid rgba(14,165,233,.25);}
+  .pillar h3{font-size:.98rem;font-weight:700;margin-bottom:3px;}
+  .pillar p{font-size:.82rem;color:var(--ink-soft);margin:0;line-height:1.5;}
+  .page--dark .pillar p{color:rgba(255,255,255,.72);}
+
+  .steps{counter-reset:step;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+  .step{position:relative;border:1px solid var(--line);border-radius:14px;padding:16px 16px 16px 52px;background:#fff;}
+  .step::before{counter-increment:step;content:counter(step);position:absolute;left:14px;top:14px;width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--indigo));color:#fff;font-size:.85rem;font-weight:800;display:flex;align-items:center;justify-content:center;}
+  .step h3{font-size:.95rem;font-weight:700;margin-bottom:4px;}
+  .step p{font-size:.8rem;color:var(--ink-soft);margin:0 0 8px;line-height:1.45;}
+  .tag{display:inline-block;font-size:.68rem;font-weight:600;color:var(--indigo);background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.22);border-radius:999px;padding:3px 10px;}
+
+  .qa-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;}
+  .qa{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff;}
+  .qa .n{font-size:.72rem;font-weight:800;color:var(--teal);letter-spacing:.1em;}
+  .qa h3{font-size:1rem;margin:6px 0 6px;}
+  .qa p{font-size:.8rem;color:var(--ink-soft);margin:0;line-height:1.5;}
+
+  .langwrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .langwrap span{font-size:.8rem;padding:6px 12px;border-radius:999px;background:var(--sand);border:1px solid var(--line);color:var(--ink-soft);}
+
+  /* Contact / back cover */
+  .contact-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:22px 24px;margin-top:8px;}
+  .contact-card a{color:var(--sky);text-decoration:none;}
+  .contact-list{display:grid;gap:14px;margin-top:18px;}
+  .contact-list .row{display:flex;align-items:center;gap:14px;}
+  .contact-list .row .ic{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+  .contact-list .row b{display:block;font-size:1rem;}
+  .contact-list .row span{font-size:.82rem;color:rgba(255,255,255,.65);}
+
+  @media screen and (max-width:760px){
+    .grid2,.grid3,.split,.steps,.qa-flow,.stat-row{grid-template-columns:1fr;}
+    .page{padding:26px 20px;min-height:auto;}
+    .cover .title{font-size:2.5rem;}
+    .cover-tag{font-size:1.2rem;}
+  }
+
+  /* Print → clean A4 PDF */
+  @media print{
+    @page{size:A4;margin:0;}
+    body{background:#fff;}
+    .toolbar{display:none !important;}
+    .doc{margin:0;max-width:none;padding:0;}
+    .page{width:210mm;min-height:297mm;height:297mm;margin:0;box-shadow:none;page-break-after:always;break-after:page;}
+    .page:last-child{page-break-after:auto;break-after:auto;}
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span class="tb-brand"><img src="/apple-touch-icon.png" alt="LexiScale"> LexiScale — Company Profile</span>
+  <span class="tb-actions">
+    <a class="btn btn-ghost" href="/">← Back to site</a>
+    <a class="btn btn-primary" href="/lexiscale-company-profile.pdf" download>Download PDF</a>
+  </span>
+</div>
+
+<div class="doc">
+
+  <!-- P1 · COVER -->
+  <section class="page page--dark cover">
+    <span class="orb a"></span><span class="orb b"></span>
+    <div style="position:relative;z-index:1;">
+      <div class="badge"><img src="/icon-512.png" alt="LexiScale logo"></div>
+      <div class="title">Lexi<span class="accent">Scale</span></div>
+      <div class="kicker" style="margin-top:14px;">Localization &amp; AI Data Studio · 125+ Languages</div>
+      <div class="cover-tag">Powering global growth through language intelligence.</div>
+      <p class="sub">A professional localization and AI data studio helping brands and AI teams communicate — and train models — clearly, accurately, and natively in every market.</p>
+      <div class="cover-meta">
+        <div><b>Company Profile</b>2026 Edition</div>
+        <div><b>www.lexiscale.com</b>info@lexiscale.com</div>
+      </div>
+    </div>
+    <div class="cover-foot">
+      <span>Native linguists · 3-layer QA · NDA-protected · 24h response</span>
+      <span>LexiScale</span>
+    </div>
+  </section>
+
+  <!-- P2 · ABOUT -->
+  <section class="page">
+    <span class="kicker">About LexiScale</span>
+    <h2 class="h-lead">The human layer behind global products and better AI.</h2>
+    <p class="lead">LexiScale helps brands adapt websites, apps, documents, learning content, games, and video for every market — and gives AI teams the multilingual speech data, annotation, and evaluation their models need. Every audience, and every model, gets language that feels clear, culturally tuned, and confidently on-brand. We combine vetted native linguists with a disciplined, three-layer quality system, and we operate under NDA from day one.</p>
+
+    <div class="split" style="margin-top:22px;">
+      <div class="card">
+        <h3>Our Mission</h3>
+        <p>To make every audience — and every model — feel locally imagined, by pairing native human expertise with a rigorous, repeatable quality system.</p>
+      </div>
+      <div class="card">
+        <h3>Our Vision</h3>
+        <p>To be the trusted human layer behind great localized products and better AI models worldwide, across 125+ languages.</p>
+      </div>
+    </div>
+
+    <div class="divh">At a glance</div>
+    <div class="stat-row">
+      <div class="stat"><b>125+</b><span>Languages &amp; locales</span></div>
+      <div class="stat"><b>500+</b><span>Vetted linguists &amp; data contributors</span></div>
+      <div class="stat"><b>3×</b><span>Independent QA layers</span></div>
+      <div class="stat"><b>24h</b><span>Response on new enquiries</span></div>
+      <div class="stat"><b>95%+</b><span>Target inter-annotator agreement</span></div>
+      <div class="stat"><b>100%</b><span>NDA &amp; consent coverage</span></div>
+    </div>
+    <span class="brandline">LexiScale · Company Profile</span>
+    <span class="pnum">02</span>
+  </section>
+
+  <!-- P3 · WHAT WE DO -->
+  <section class="page">
+    <span class="kicker">What We Do</span>
+    <h2 class="h-lead">Two divisions, one shared quality system.</h2>
+    <p class="lead">Choose a single workstream or combine them into one operating rhythm — from source content and multilingual delivery to the data that trains and evaluates your models.</p>
+
+    <div class="divh">Localization &amp; Media</div>
+    <div class="grid3">
+      <div class="card"><span class="idx">01</span><h3>Website Localization</h3><p>Market-tuned messaging, navigation, and multilingual SEO for landing pages, product journeys, and ecommerce.</p></div>
+      <div class="card"><span class="idx">02</span><h3>App &amp; Software</h3><p>String handling, UI-expansion awareness, and release-ready QA for native-feeling product language.</p></div>
+      <div class="card"><span class="idx">03</span><h3>Document &amp; Regulatory</h3><p>Review-led delivery for contracts, SOPs, policies, training packs, and regulated content.</p></div>
+      <div class="card"><span class="idx">04</span><h3>Multimedia Transcreation</h3><p>Subtitles, scripts, voice direction, and creative adaptation for campaigns and learning assets.</p></div>
+      <div class="card"><span class="idx">05</span><h3>AI-Assisted MTPE</h3><p>High-volume workflows where machine output is refined by expert reviewers for tone and accuracy.</p></div>
+      <div class="card"><span class="idx">06</span><h3>Interpretation</h3><p>Scheduled interpreting and multilingual support for meetings, onboarding, and sensitive sessions.</p></div>
+      <div class="card"><span class="idx">07</span><h3>eLearning End-to-End</h3><p>Course adaptation from authoring export to SCORM/xAPI, LMS deployment, and voiceover.</p></div>
+      <div class="card"><span class="idx">08</span><h3>Game Localization</h3><p>UI strings, dialogue, subtitles, age-rating adaptation, and LQA for console, PC, and mobile.</p></div>
+      <div class="card"><span class="idx">09</span><h3>Voice Over &amp; Dubbing</h3><p>Native voice talent, studio recording, and lip-sync dubbing with audio QA in 125+ languages.</p></div>
+    </div>
+
+    <div class="divh">AI Data Solutions</div>
+    <p class="muted" style="font-size:.86rem;margin:0 0 4px;">A full data division — <b>AI Speech Data Collection</b>, <b>Data Annotation &amp; Labeling</b>, <b>Transcription &amp; ASR</b>, and <b>LLM Training &amp; Evaluation</b> — detailed on the next page.</p>
+    <span class="brandline">LexiScale · Company Profile</span>
+    <span class="pnum">03</span>
+  </section>
+
+  <!-- P4 · AI DATA + LANGUAGES -->
+  <section class="page page--dark">
+    <span class="orb a" style="opacity:.35;"></span>
+    <span class="kicker">AI Data Solutions</span>
+    <h2 class="h-lead" style="color:#fff;">The human layer behind better AI models.</h2>
+    <p class="lead muted">Great AI starts with great data, and great data starts with real people. Our vetted native-speaker network records, transcribes, annotates, and evaluates in 125+ languages — so the models you train sound less like machines and more like the people they serve.</p>
+
+    <div class="grid2" style="margin-top:20px;">
+      <div class="card"><h3>🎙️ Speech &amp; Voice Data</h3><p>Scripted reads, free-flowing conversation, wake-word utterances, and bilingual code-switching — balanced, quality-checked, and consent-backed.</p></div>
+      <div class="card"><h3>🏷️ Annotation &amp; Labeling</h3><p>Transcription, entity &amp; intent tagging, sentiment, segmentation, and moderation across text, audio, image, and video.</p></div>
+      <div class="card"><h3>📝 Transcription &amp; ASR Data</h3><p>Verbatim and clean-read transcription, time-alignment, and speaker diarization with audio QA at scale.</p></div>
+      <div class="card"><h3>🤖 LLM &amp; RLHF Services</h3><p>Preference data, response writing, prompt sets, red-teaming, and multilingual evaluation by native readers.</p></div>
+    </div>
+
+    <div class="divh">Language coverage</div>
+    <p class="muted" style="font-size:.9rem;margin:0;">125+ languages across every major region — European, Asian, Middle Eastern, African, and the Americas.</p>
+    <div class="langwrap">
+      <span>English</span><span>French</span><span>German</span><span>Spanish</span><span>Portuguese</span><span>Italian</span><span>Dutch</span><span>Polish</span><span>Japanese</span><span>Simplified Chinese</span><span>Korean</span><span>Arabic</span><span>Hindi</span><span>+ 113 more</span>
+    </div>
+    <span class="brandline">LexiScale · Company Profile</span>
+    <span class="pnum">04</span>
+  </section>
+
+  <!-- P5 · INDUSTRIES + WHY -->
+  <section class="page">
+    <span class="kicker">Industries We Serve</span>
+    <h2 class="h-lead">Built for regulated, product-led, and customer-facing teams.</h2>
+    <div class="grid3" style="margin-top:6px;">
+      <div class="card"><span class="idx">01</span><h3>Life Sciences &amp; Healthcare</h3><p>Patient-facing content, training, and precise terminology for sensitive communication.</p></div>
+      <div class="card"><span class="idx">02</span><h3>Legal &amp; Compliance</h3><p>Contracts, policies, and disclosures that stay clear under scrutiny.</p></div>
+      <div class="card"><span class="idx">03</span><h3>Technology &amp; SaaS</h3><p>Product interfaces, release notes, support content, and onboarding journeys.</p></div>
+      <div class="card"><span class="idx">04</span><h3>Retail &amp; Ecommerce</h3><p>Campaign messaging, product copy, and multilingual paths that protect conversion.</p></div>
+      <div class="card"><span class="idx">05</span><h3>Learning &amp; Training</h3><p>Courses, assessments, and onboarding that still teach well after adaptation.</p></div>
+      <div class="card"><span class="idx">06</span><h3>Support &amp; Operations</h3><p>Macros, knowledge bases, chat flows, and internal guidance for service teams.</p></div>
+    </div>
+
+    <div class="divh">Why LexiScale</div>
+    <div class="split" style="margin-top:0;">
+      <div>
+        <div class="pillar"><span class="ic">🎯</span><div><h3>Sector-Matched Teams</h3><p>Specialists who already know your industry's terminology and audience — not generalists learning on the job.</p></div></div>
+        <div class="pillar"><span class="ic">⚡</span><div><h3>Fixed Scope, Real Deadlines</h3><p>A confirmed timeline and fixed cost before work begins. No surprise scope creep.</p></div></div>
+      </div>
+      <div>
+        <div class="pillar"><span class="ic">🔁</span><div><h3>Built to Scale With You</h3><p>From a single landing page to a rolling 12-language release calendar — same process, same quality bar.</p></div></div>
+        <div class="pillar"><span class="ic">🤝</span><div><h3>One Contact, Full Accountability</h3><p>A project manager coordinates everything, so you never chase multiple people for one answer.</p></div></div>
+      </div>
+    </div>
+    <span class="brandline">LexiScale · Company Profile</span>
+    <span class="pnum">05</span>
+  </section>
+
+  <!-- P6 · PROCESS + QA -->
+  <section class="page">
+    <span class="kicker">How We Work</span>
+    <h2 class="h-lead">From brief to delivery, nothing falls through the cracks.</h2>
+    <div class="steps">
+      <div class="step"><h3>Brief &amp; Intake</h3><p>You share content, target languages, deadline, and brand notes. We ask the right questions upfront.</p><span class="tag">24h response window</span></div>
+      <div class="step"><h3>Scoping &amp; Quoting</h3><p>We assess volume, complexity, and formats. You get a fixed scope, timeline, and cost.</p><span class="tag">Fixed-price quote</span></div>
+      <div class="step"><h3>Kickoff &amp; Matching</h3><p>Your PM assembles a sector-matched team of translators, editors, and engineers.</p><span class="tag">Sector-matched team</span></div>
+      <div class="step"><h3>Translation &amp; Adaptation</h3><p>Terminology and style guides are applied from the first segment; queries resolved live.</p><span class="tag">CAT tools + style guides</span></div>
+      <div class="step"><h3>Review &amp; QA</h3><p>An independent editor reviews the full output; LQA validates layout and function.</p><span class="tag">3-layer review cycle</span></div>
+      <div class="step"><h3>Delivery &amp; Handoff</h3><p>Files arrive in your format with QA sign-off and a brief post-delivery check-in.</p><span class="tag">Format-ready output</span></div>
+    </div>
+
+    <div class="divh">Quality Assurance — three independent checks</div>
+    <div class="qa-flow">
+      <div class="qa"><span class="n">LAYER 01</span><h3>Native Translation</h3><p>A qualified native linguist, matched to your sector, produces the first pass against your glossary and style guide.</p></div>
+      <div class="qa"><span class="n">LAYER 02</span><h3>Independent Review</h3><p>A second linguist edits for accuracy, tone, and consistency — the work is never self-checked.</p></div>
+      <div class="qa"><span class="n">LAYER 03</span><h3>LQA &amp; Sign-off</h3><p>Linguistic QA validates layout, function, and formatting, with agreement scoring before handoff.</p></div>
+    </div>
+    <span class="brandline">LexiScale · Company Profile</span>
+    <span class="pnum">06</span>
+  </section>
+
+  <!-- P7 · CONTACT / BACK COVER -->
+  <section class="page page--dark">
+    <span class="orb a"></span><span class="orb b"></span>
+    <div style="position:relative;z-index:1;flex:1;display:flex;flex-direction:column;">
+      <div class="badge" style="width:72px;height:72px;border-radius:18px;background:#fff;padding:8px;margin-bottom:22px;"><img src="/icon-512.png" alt="LexiScale" style="width:100%;height:100%;object-fit:contain;"></div>
+      <span class="kicker">Let's Talk</span>
+      <h2 class="h-lead" style="color:#fff;max-width:20ch;">Tell us what you need, and we'll shape the right multilingual path.</h2>
+      <p class="lead muted">Send your brief, timeline, or sample material and we'll turn it into a clear plan — with a fixed scope, a sector-matched team, and a 24-hour response on new enquiries.</p>
+
+      <div class="contact-list">
+        <div class="row"><span class="ic">✉️</span><div><b>info@lexiscale.com</b><span>Email us your brief</span></div></div>
+        <div class="row"><span class="ic">🌐</span><div><b>www.lexiscale.com</b><span>Explore services &amp; request a quote</span></div></div>
+        <div class="row"><span class="ic">in</span><div><b>linkedin.com/company/lexiscale</b><span>Follow us on LinkedIn</span></div></div>
+      </div>
+    </div>
+    <div class="cover-foot" style="position:relative;left:0;right:0;bottom:0;margin-top:18px;">
+      <span>© 2026 LexiScale · Localization &amp; AI Data Studio</span>
+      <span>125+ languages · NDA-protected</span>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
