@@ -60,7 +60,7 @@
     "email": "info@lexiscale.com",
     "foundingDate": "2024",
     "areaServed": "Worldwide",
-    "serviceType": ["Localization", "Translation", "eLearning Localization", "Game Localization", "Website Localization", "AI Speech Data Collection", "Data Annotation and Labeling", "LLM Training and Evaluation"],
+        "serviceType": ["Localization", "Translation", "eLearning Localization", "Game Localization", "Website Localization", "Closed Captions", "Subtitling", "AI Speech Data Collection", "Data Annotation and Labeling", "LLM Training and Evaluation"],
     "sameAs": ["https://www.linkedin.com/company/lexiscale"],
     "knowsLanguage": ["English","French","German","Spanish","Italian","Portuguese","Dutch","Polish","Japanese","Chinese","Korean","Arabic","Hindi"]
   }
@@ -86,6 +86,7 @@
         {"@type":"Offer","itemOffered":{"@type":"Service","name":"Game Localization and LQA"}},
         {"@type":"Offer","itemOffered":{"@type":"Service","name":"Document and Regulatory Translation"}},
         {"@type":"Offer","itemOffered":{"@type":"Service","name":"Multimedia Transcreation"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Closed Captions and Subtitles"}},
         {"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Speech Data Collection"}},
         {"@type":"Offer","itemOffered":{"@type":"Service","name":"Data Annotation and Labeling"}},
         {"@type":"Offer","itemOffered":{"@type":"Service","name":"LLM Training and Evaluation"}}
@@ -119,6 +120,11 @@
         "@type": "Question",
         "name": "What is LexiScale's quality assurance process?",
         "acceptedAnswer": {"@type":"Answer","text":"Every project passes three independent QA layers: Linguistic QA (accuracy, tone, brand voice), Technical QA (UI, layout, function), and Cultural & Market QA (idioms, references, regulatory suitability)."}
+      },
+      {
+        "@type": "Question",
+        "name": "How does LexiScale produce closed captions and subtitles?",
+        "acceptedAnswer": {"@type":"Answer","text":"LexiScale uses a hybrid workflow: AI speech-to-text and machine translation create a timed draft, native captioners and subtitlers post-edit every file, and independent QA signs the delivery spec. Full-human origination is available. Client media is never used to train public AI models."}
       }
     ]
   }
@@ -1544,7 +1550,9 @@ button, input, select, textarea {
   .site-footer { padding: 56px 20px 36px; }
   .footer-bottom { flex-direction: column; gap: 10px; align-items: flex-start; }
   #ai-data .story-grid > .card figure { height: 180px; }
+  #captions .story-grid > .card figure { height: 180px; }
   #ai-data .section-shell > .reveal[style*="grid"] { padding: 28px 24px !important; }
+  #captions .section-shell > .reveal[style*="grid"] { padding: 28px 24px !important; }
 }
 @media (max-width: 480px) {
   .section { padding: 44px 16px; }
@@ -1646,7 +1654,7 @@ const translations = {
     svc_doc_title: "Document and Regulatory Translation",
     svc_doc_desc: "Clear, review-led delivery for business documents, contracts, SOPs, policies, training packs, and regulated content.",
     svc_media_title: "Multimedia Transcreation",
-    svc_media_desc: "Subtitles, scripts, voice direction, on-screen copy, and creative adaptation for campaigns, explainers, and learning assets.",
+    svc_media_desc: "Closed captions, SDH, translated subtitles, scripts, voice direction, and creative adaptation for campaigns, explainers, and learning assets.",
     svc_ai_title: "AI-Assisted MTPE",
     svc_ai_desc: "Efficient high-volume workflows where machine output is refined by expert reviewers to restore tone, accuracy, and consistency.",
     svc_interp_title: "Interpretation and Language Support",
@@ -3017,7 +3025,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <article class="card detail-card reveal d-1" data-tilt>
             <span class="detail-badge">04</span>
             <h3 data-i18n="svc_media_title">Multimedia Transcreation</h3>
-            <p data-i18n="svc_media_desc">Subtitles, scripts, voice direction, on-screen copy, and creative adaptation for campaigns, explainers, and learning assets.</p>
+            <p data-i18n="svc_media_desc">Closed captions, SDH, translated subtitles, scripts, voice direction, and creative adaptation for campaigns, explainers, and learning assets.</p>
           </article>
 
           <article class="card detail-card reveal" data-tilt>
@@ -3185,6 +3193,104 @@ document.addEventListener("DOMContentLoaded", () => {
             <p style="font-size:2rem;font-weight:800;color:var(--teal-deep);margin:0 0 6px;">3x</p>
             <p style="font-size:0.9rem;color:var(--ink-soft);margin:0;">Audio QA passes before delivery</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closed Captions & Subtitles -->
+    <section class="section" id="captions">
+      <div class="section-shell">
+        <div class="section-head section-head--stacked reveal">
+          <div class="section-kicker">Closed Captions &amp; Subtitles</div>
+          <h2 class="section-title" style="max-width:30ch;">Captions and subtitles that hold up at catalogue scale, in 125+ languages.</h2>
+          <p class="section-copy" style="max-width:64ch;">Closed captions keep the same language as the audio so the file is accessible. Subtitles carry the meaning into another language. We run both as one programme: AI drafts the timed text, native specialists post-edit every file, and independent QA signs your spec before delivery.</p>
+        </div>
+
+        <div class="story-grid">
+          <article class="card reveal" data-tilt style="overflow:hidden;">
+            <figure style="margin:0; height:220px; overflow:hidden; background:var(--sand);">
+              <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&amp;q=80&amp;auto=format&amp;fit=crop" alt="Viewer watching a film with on-screen captions" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </figure>
+            <div style="padding:32px;">
+              <div class="card-kicker" style="margin-bottom:16px;">Closed Captions &amp; SDH</div>
+              <h3 style="font-size:1.4rem;font-weight:700;letter-spacing:-0.02em;margin:0 0 12px;">Same-language captions that stay readable with the sound off.</h3>
+              <p style="font-size:1rem;line-height:1.65;color:var(--ink-soft);margin:0 0 20px;">We produce FCC-style closed captions and SDH files from the source audio: speaker IDs, non-speech cues, shot-change timing, and reading-speed limits. English, and every other source language on the roster, is captioned by a native specialist — never shipped as a raw speech-to-text export.</p>
+              <div class="check-list">
+                <div class="check-item"><span>Same-language CC and SDH, including speaker IDs and [sound] labels</span></div>
+                <div class="check-item"><span>Reading-speed, line-length, and overlap checks against your house spec</span></div>
+                <div class="check-item"><span>608/708, SCC, SRT, VTT, IMSC, and TTML packaging</span></div>
+                <div class="check-item"><span>Forced-narrative and on-screen title files quoted as a separate track</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal d-1" data-tilt style="overflow:hidden;">
+            <figure style="margin:0; height:220px; overflow:hidden; background:var(--sand);">
+              <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&amp;q=80&amp;auto=format&amp;fit=crop" alt="Multilingual film production and subtitle localisation" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </figure>
+            <div style="padding:32px;">
+              <div class="card-kicker" style="margin-bottom:16px;">Translated Subtitles</div>
+              <h3 style="font-size:1.4rem;font-weight:700;letter-spacing:-0.02em;margin:0 0 12px;">One locked source file, many languages in parallel — not in a queue.</h3>
+              <p style="font-size:1rem;line-height:1.65;color:var(--ink-soft);margin:0 0 20px;">Once source captions are approved, we draft each target language with machine translation and send it to a native subtitler who rewrites, reflows, and signs the file. Languages run side by side so a 20-locale drop does not wait on locale 19. Glossaries and names stay consistent across the set.</p>
+              <div class="check-list">
+                <div class="check-item"><span>Native post-edit of every target language, including CJK, Indic, and RTL</span></div>
+                <div class="check-item"><span>Spotting inherited from the locked source so versions stay in sync</span></div>
+                <div class="check-item"><span>Netflix, BBC, EBU, or your in-house timed-text spec</span></div>
+                <div class="check-item"><span>Parallel linguist benches across 125+ locales, scaled with five days’ notice</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="reveal" style="margin-top:48px;padding:36px 40px;border-radius:20px;background:linear-gradient(135deg,rgba(14,165,233,0.07),rgba(99,102,241,0.07));border:1px solid rgba(14,165,233,0.18);">
+          <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-deep);margin:0 0 8px;">The AI in this workflow</p>
+          <h3 style="font-size:1.25rem;font-weight:700;letter-spacing:-0.02em;margin:0 0 12px;">AI drafts. Native linguists deliver. Your media is never used to train a model.</h3>
+          <p style="font-size:1rem;line-height:1.65;color:var(--ink-soft);margin:0 0 24px;max-width:72ch;">Speech-to-text and machine translation are used only to create a timed draft. A native captioner or subtitler post-edits every line. A second linguist plus automated QC signs reading speed, line length, overlaps, and your spec. This is a production pipeline for captions and subtitles — it is not the AI-data collection work we run for model teams.</p>
+          <div class="timeline" style="margin:0;">
+            <article class="timeline-item">
+              <div class="timeline-step">01</div>
+              <h3>Ingest</h3>
+              <p>Video or proxy, language list, frame rate, and delivery spec.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-step">02</div>
+              <h3>AI draft</h3>
+              <p>ASR times the source. MT drafts each target from the locked file.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-step">03</div>
+              <h3>Native post-edit</h3>
+              <p>Specialists correct wording, speakers, timing, and line breaks.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-step">04</div>
+              <h3>QA &amp; package</h3>
+              <p>Spec QC, then SRT, VTT, IMSC, SCC, STL, or your house format.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top:32px;padding:40px 48px;border-radius:20px;background:linear-gradient(135deg,rgba(14,165,233,0.07),rgba(99,102,241,0.07));border:1px solid rgba(14,165,233,0.18);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;text-align:center;">
+          <div>
+            <p style="font-size:2rem;font-weight:800;color:var(--teal-deep);margin:0 0 6px;">125+</p>
+            <p style="font-size:0.9rem;color:var(--ink-soft);margin:0;">Languages and variants for CC and Subs</p>
+          </div>
+          <div>
+            <p style="font-size:2rem;font-weight:800;color:var(--teal-deep);margin:0 0 6px;">3</p>
+            <p style="font-size:0.9rem;color:var(--ink-soft);margin:0;">Workflow tiers: hybrid default, full human on request</p>
+          </div>
+          <div>
+            <p style="font-size:2rem;font-weight:800;color:var(--teal-deep);margin:0 0 6px;">20h</p>
+            <p style="font-size:0.9rem;color:var(--ink-soft);margin:0;">Weekly video capacity per high-resource language</p>
+          </div>
+          <div>
+            <p style="font-size:2rem;font-weight:800;color:var(--teal-deep);margin:0 0 6px;">0</p>
+            <p style="font-size:0.9rem;color:var(--ink-soft);margin:0;">Client files used to train public AI models</p>
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top:36px;text-align:center;">
+          <a href="#contact" class="button button-primary">Request captions or subtitles</a>
         </div>
       </div>
     </section>
@@ -3830,6 +3936,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   <option value="Website Localization" data-i18n="form_opt_2">Strategic Web Localization</option>
                   <option value="Software / App Localization" data-i18n="form_opt_3">Software / App Globalization</option>
                   <option value="Multimedia Localization" data-i18n="form_opt_4">Multimedia Transcreation</option>
+                  <option value="Closed Captions and Subtitles">Closed Captions &amp; Subtitles</option>
                   <option value="eLearning Localization">eLearning End-to-End Localization</option>
                   <option value="Game Localization">Game Localization &amp; LQA</option>
                   <option value="AI-Assisted Translation" data-i18n="form_opt_5">AI-Augmented MTPE</option>
@@ -3975,6 +4082,16 @@ document.addEventListener("DOMContentLoaded", () => {
               <p>Yes. For eLearning we handle round-trip workflows in Articulate Storyline, Rise, Adobe Captivate, and Lectora, including SCORM/xAPI packaging and LMS validation. For games we work directly with string files, dialogue scripts, and cutscene subtitle formats, and run LQA alongside translation in the target build.</p>
             </div>
           </div>
+
+          <div class="faq-accordion-item">
+            <button class="faq-accordion-q">
+              How do you produce closed captions and subtitles — is it AI or human?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-accordion-a">
+              <p>The default is hybrid. Speech-to-text and machine translation create a timed draft; a native captioner or subtitler post-edits every line; independent QA checks reading speed, line length, overlaps, and your house spec (Netflix, BBC, FCC, EBU, or custom). Full-human origination is available for flagship or regulated titles. We do not deliver AI-only files. Client media is never used to train public AI models.</p>
+            </div>
+          </div>
         </div>
 
         <div class="band reveal">
@@ -4026,6 +4143,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <a href="#services">eLearning localization</a>
             <a href="#services">Game localization</a>
             <a href="#voice-over">Voice Over &amp; Dubbing</a>
+            <a href="#captions">Closed Captions &amp; Subtitles</a>
             <a href="#ai-data">AI speech data collection</a>
             <a href="#ai-data">Data annotation &amp; labeling</a>
             <a href="#ai-data">LLM training &amp; evaluation</a>
